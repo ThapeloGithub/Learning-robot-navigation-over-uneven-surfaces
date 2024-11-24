@@ -103,7 +103,7 @@ This repository contains the implementation for training and testing quadrupedal
 ---
 
 ### Dependencies
-Refer to `requirements.txt` for a complete list of required libraries.
+Refer to `requirements.txt` for a complete list of required libraries. Ensure python==3.8.0 is used
 
 ---
 
