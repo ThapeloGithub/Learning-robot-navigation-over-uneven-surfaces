@@ -1,0 +1,78 @@
+# ======== CONFIGURATION FILE FOR TRAINING ========
+# RENAME THE RUN NAME FOR A NEW RUN
+
+# ======= RUN ======= #
+run: 
+  name: DQN_Train_Terrain6
+
+# ======= MODEL ======= #
+model:
+  name: DQN
+  learning_rate_actor: 1.0e-4
+  learning_rate_critic: 1.0e-4
+  batch_size: 64
+  gamma: 0.99
+  hidden_layer_size: [128, 128, 128]
+  weight_decay: [0, 0, 0]
+  dropout_rate: [0, 0, 0]
+  tau: 0.005
+
+# ======= EPSILON GREEDY ======= #
+epsilon_greedy:
+  eps_init: 0.99
+  eps_end: 0.05
+  eps_decay: 5.0e-4
+  epsilon_decay_type: 'exponential'  # Options: linear, exponential, stretched
+  stretched_A: 0.5
+  stretched_B: 0.1
+  stretched_C: 0.1
+
+# ======= TRAINING ======= #
+training:
+  device: 'cpu'  # Options: auto, cpu, cuda:0
+  num_workers: 40  # Number of CPU cores to use for parallel computation
+  num_train_episodes: 5000
+  max_steps_per_episode: 10000  # Max steps per episode
+  n_step: False
+  base_results_dir: './results/train/dqn_train'
+  save_model_weights: True
+
+# ======= TESTING ======= #
+testing:
+  device: 'auto'  # Options: auto, cpu, cuda:0
+  num_workers: 40
+  num_test_episodes: 1000
+  max_steps_per_episode: 50000
+  base_results_dir: './results/test/'
+  record_video: True
+
+# ======= ENVIRONMENT ======= #
+environment:
+  render_mode: 'DIRECT'  # Options: DIRECT, GUI
+  video_mode: False  # For recording video in DIRECT mode
+  enable_keyboard: False
+  environment_type: 'slope'
+  goal_type: 'peak'
+  x_distance_to_goal: 40  # Set to a large value for continuous navigation
+  goal_step: 400
+  time_step_size: 1/20
+  distance_to_goal_penalty: 0.7
+  time_penalty: 0.2
+  target_velocity_change: 0.5
+
+# ======= PLOTTING ======= #
+plotting:
+  plot_trajectories_episode_interval: 500
+  record_trajectory_time_step_interval: 10  # Decrease to increase rate of recording coordinates
+
+# ======= HYPERPARAMETER TUNING ======= #
+hyperparameter_tuning:
+  type: model  # Options: epsilon_greedy, model, environment
+  tuning_variable: learning_rate_actor  # Variable to tune
+  value_list: [1.0e-3, 1.0e-4, 1.0e-5, 1.0e-6]
+
+# ======= REWARD FUNCTION ======= #
+reward_function:
+  progress_reward: 0.1        # Incentive for moving toward the goal
+  stability_penalty: 0.05     # Slightly less penalty to allow some instability while learning
+  end_goal_bonus: 1.0         # Reward for successfully reaching the goal
