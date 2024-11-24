@@ -98,7 +98,7 @@ This repository contains the implementation for training and testing quadrupedal
 ## Usage Notes
 - Ensure dependencies are installed using the `requirements.txt` file.
 - For Two-Wheel Robots, navigate to the directory:
-  `Learning-robot-navigation-over-uneven-surfaces/tree/main/Two-Wheel.Folders`.
+  `Learning-robot-navigation-over-uneven-surfaces/tree/main/Two-Wheel`.
 
 ---
 
